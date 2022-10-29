@@ -4,6 +4,7 @@
   "description": "\"Backend for pheonixhub\"",
   "main": "index.js",
   "scripts": {
+    "start": "index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rahul Patil",
