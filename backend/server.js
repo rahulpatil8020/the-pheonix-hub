@@ -1,9 +1,20 @@
+require("dotenv").config();
+
 const express = require("express");
-
 const app = express();
-const path = require("path");
-const PORT = 8000;
+const cors = require("cors");
+const connection = require("./db");
+const userRoutes = require("./routes/users");
+const authRoutes = require("./routes/auth");
 
-app.use("/", express.static(path.join(__dirname)));
+connection();
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.use(express.json());
+app.use(cors());
+
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/auth", authRoutes);
+
+const port = process.env.PORT || 8000;
+
+app.listen(port, () => console.log(`Listening on port : ${port}`));
