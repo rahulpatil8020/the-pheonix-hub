@@ -41,3 +41,5 @@ const validate = (data) => {
     password: Joi.string().required().label("Password"),
   });
 };
+
+module.exports = router;

@@ -17,4 +17,4 @@ app.use("/api/v1/auth", authRoutes);
 
 const port = process.env.PORT || 8000;
 
-app.listen(port, () => console.log(`Listening on port : ${port}`));
+app.listen(port, () => console.log(`Listening on port : ${port}...`));
