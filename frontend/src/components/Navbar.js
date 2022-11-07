@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
-
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
@@ -22,9 +22,15 @@ const Navbar = () => {
         <div className="flex items-center">
           <h1 className="text-3xl font-bold mr-4 sm:text-4xl">Pheonix</h1>
           <ul className="hidden md:flex items-center">
-            <li>Home</li>
-            <li>About</li>
-            <li>Support</li>
+            <Link>
+              <li>Home</li>
+            </Link>
+            <Link to="/about">
+              <li>About</li>
+            </Link>
+            <Link>
+              <li>Support</li>
+            </Link>
           </ul>
         </div>
         <div className="hidden md:flex pr-4">

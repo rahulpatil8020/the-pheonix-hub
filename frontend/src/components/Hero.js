@@ -1,8 +1,10 @@
 import React from "react";
 import Typed from "react-typed";
+import Navbar from "./Navbar";
 const Hero = () => {
   return (
     <div>
+      <Navbar />
       <div className="max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center">
         <p className="text-indigo-600 font-bold p-2">
           GROWING WITH PROGRAMMING
