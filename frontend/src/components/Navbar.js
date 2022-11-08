@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
 import { Link } from "react-router-dom";
-const Navbar = () => {
+import { UserContext } from "../models/user-context";
+const Navbar = (props) => {
+  const [user, setUser] = useContext(UserContext);
   const [nav, setNav] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const isMob = width <= 992;
@@ -16,6 +18,7 @@ const Navbar = () => {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
   }, []);
+  console.log(user);
   return (
     <div className="w-screen h-[80px] z-10 bg-zinc-200 drop-shadlow-lg">
       <div className="px-2 flex justify-between items-center w-full h-full">
@@ -33,10 +36,19 @@ const Navbar = () => {
             </Link>
           </ul>
         </div>
+
         <div className="hidden md:flex pr-4">
-          <button className="border-none bg-transparent text-black mr-4">
-            Sign In
+          <button
+            onClick={() => {
+              setUser({
+                Name: "Rahul",
+              });
+            }}
+            className="border-none bg-transparent text-black mr-4"
+          >
+            <Link to="/code">Sign In</Link>
           </button>
+
           <button className="px-8 py-3">Sign Up</button>
         </div>
         <div className="md:hidden" onClick={handleClick}>
@@ -52,9 +64,11 @@ const Navbar = () => {
         <li className="border-b-2 border-zinc-300 w-full">About</li>
         <li className="border-b-2 border-zinc-300 w-full">Support</li>
         <div className="flex flex-col my-4">
-          <button className="bg-transparent text-indigo-600 px-8 py-3 mb-4">
-            Sign In
-          </button>
+          <Link to="/code">
+            <button className="bg-transparent text-indigo-600 px-8 py-3 mb-4">
+              Sign In
+            </button>
+          </Link>
           <button className="px-8 py-3">Sign Up</button>
         </div>
       </ul>

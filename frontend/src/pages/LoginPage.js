@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import loginImage from "../assets/loginimage.jpeg";
+import { UserContext } from "../models/user-context";
 
 const LoginPage = () => {
+  const [user, setUser] = useContext(UserContext);
+  console.log(user, "//////");
   return (
     <div className="w-full h-screen flex">
       <div className="grid grid-cols-1 md:grid-cols-2 m-auto h-[550px] shadow-lg shadow-gray-600 sm:max-w-[900px]">
