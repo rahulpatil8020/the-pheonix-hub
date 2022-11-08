@@ -15,20 +15,39 @@ const Navbar = (props) => {
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
   }
+  const getUser = async () => {
+    try {
+      const url = "http://localhost:8000/api/v1/users";
+      await axios
+        .get(url, {
+          params: {
+            userToken: userToken,
+          },
+        })
+        .then((res) => {
+          if (res) setUser(res.data);
+          console.log(user, "...");
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
+    getUser();
     window.addEventListener("resize", handleWindowSizeChange);
     return () => {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
   }, []);
   const navigate = useNavigate();
+
   return (
     <div className="w-screen h-[80px] z-10 bg-zinc-200 drop-shadlow-lg">
       <div className="px-2 flex justify-between items-center w-full h-full">
         <div className="flex items-center">
           <h1 className="text-3xl font-bold mr-4 sm:text-4xl">Pheonix</h1>
           <ul className="hidden md:flex items-center">
-            <Link>
+            <Link to="/home">
               <li>Home</li>
             </Link>
             <Link to="/about">
@@ -37,6 +56,7 @@ const Navbar = (props) => {
             <Link>
               <li>Support</li>
             </Link>
+            {user && <li>Hey {user?.firstName}</li>}
           </ul>
         </div>
         {userToken ? (
@@ -58,7 +78,7 @@ const Navbar = (props) => {
               onClick={(e) => {
                 e.preventDefault();
                 if (!userToken) navigate("/login");
-                else navigate("/code");
+                else navigate("/home");
               }}
               className="border-none bg-transparent text-black mr-4"
             >
@@ -69,7 +89,7 @@ const Navbar = (props) => {
               onClick={(e) => {
                 e.preventDefault();
                 if (!userToken) navigate("/signup");
-                else navigate("/code");
+                else navigate("/home");
               }}
               className="px-8 py-3"
             >
