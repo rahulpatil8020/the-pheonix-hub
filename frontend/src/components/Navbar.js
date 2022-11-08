@@ -2,13 +2,16 @@ import React, { useState, useEffect, useContext } from "react";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { UserContext } from "../models/user-context";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 const Navbar = (props) => {
   const [user, setUser] = useContext(UserContext);
   const [nav, setNav] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const isMob = width <= 992;
+  const userToken = localStorage.getItem("token");
   const handleClick = () => setNav(!nav);
-
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
   }
@@ -18,7 +21,7 @@ const Navbar = (props) => {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
   }, []);
-  console.log(user);
+  const navigate = useNavigate();
   return (
     <div className="w-screen h-[80px] z-10 bg-zinc-200 drop-shadlow-lg">
       <div className="px-2 flex justify-between items-center w-full h-full">
@@ -36,21 +39,44 @@ const Navbar = (props) => {
             </Link>
           </ul>
         </div>
+        {userToken ? (
+          <div className="hidden md:flex pr-4">
+            <button
+              className="px-8 py-3"
+              onClick={(e) => {
+                e.preventDefault();
+                localStorage.removeItem("token");
+                navigate("/login");
+              }}
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div className="hidden md:flex pr-4">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                if (!userToken) navigate("/login");
+                else navigate("/code");
+              }}
+              className="border-none bg-transparent text-black mr-4"
+            >
+              Login
+            </button>
 
-        <div className="hidden md:flex pr-4">
-          <button
-            onClick={() => {
-              setUser({
-                Name: "Rahul",
-              });
-            }}
-            className="border-none bg-transparent text-black mr-4"
-          >
-            <Link to="/code">Sign In</Link>
-          </button>
-
-          <button className="px-8 py-3">Sign Up</button>
-        </div>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                if (!userToken) navigate("/signup");
+                else navigate("/code");
+              }}
+              className="px-8 py-3"
+            >
+              Sign Up
+            </button>
+          </div>
+        )}
         <div className="md:hidden" onClick={handleClick}>
           {!nav ? <HiOutlineMenu /> : <HiX />}
         </div>
@@ -63,14 +89,42 @@ const Navbar = (props) => {
         <li className="border-b-2 border-zinc-300 w-full">Home</li>
         <li className="border-b-2 border-zinc-300 w-full">About</li>
         <li className="border-b-2 border-zinc-300 w-full">Support</li>
-        <div className="flex flex-col my-4">
-          <Link to="/code">
-            <button className="bg-transparent text-indigo-600 px-8 py-3 mb-4">
-              Sign In
+        {userToken ? (
+          <div className="flex flex-col my-4">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                localStorage.removeItem("token");
+                navigate("/login");
+              }}
+              className="px-8 py-3"
+            >
+              Logout
             </button>
-          </Link>
-          <button className="px-8 py-3">Sign Up</button>
-        </div>
+          </div>
+        ) : (
+          <div className="flex flex-col my-4">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/login");
+              }}
+              className="bg-transparent text-black px-8 py-3 mb-4"
+            >
+              Login
+            </button>
+
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/signup");
+              }}
+              className="px-8 py-3"
+            >
+              Sign Up
+            </button>
+          </div>
+        )}
       </ul>
     </div>
   );

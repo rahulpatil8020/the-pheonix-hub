@@ -4,8 +4,9 @@ import { UserContext } from "../models/user-context";
 import { useContext } from "react";
 const PrivateRoutes = ({ children, ...rest }) => {
   const [user, setUser] = useContext(UserContext);
-  console.log(user, ".....");
-  return user ? (
+  const authToken = localStorage.getItem("token");
+  
+  return authToken ? (
     <>
       <Navbar />
       <Outlet />
