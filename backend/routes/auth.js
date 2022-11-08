@@ -24,13 +24,12 @@ router.post("/", async (req, res) => {
 
     if (!validPassword) {
       return res.status(401).send({ message: "Invalid Email or Password" });
-
-      const token = user.generateAuthToken();
-      res.status(200).send({ data: token, message: "Logged in Successfully" });
     }
+    const token = user.generateAuthToken();
+    res.status(200).send({ data: token, message: "Logged in Successfully" });
   } catch (error) {
     res.status(500).send({
-      message: "Internal Server Error",
+      message: "Internal Server Error...",
     });
   }
 });
@@ -40,6 +39,7 @@ const validate = (data) => {
     email: Joi.string().email().required().label("Email"),
     password: Joi.string().required().label("Password"),
   });
+  return schema.validate(data);
 };
 
 module.exports = router;
