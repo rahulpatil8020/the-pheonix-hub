@@ -1,17 +1,27 @@
 const { User, validate } = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
+const jwt_decode = require("jwt-decode");
+const mongodb = require("mongodb");
+
+const ObjectId = mongodb.ObjectId;
 
 // @desc Get User
 // @route GET /user/:id
 // @access Private
 
 const getUser = asyncHandler(async (req, res) => {
-  const user = await User.findOne().select("-password");
-  if (!user) {
-    return res.status(400).json({ message: "No user found" });
+  if (req.query.userToken) {
+    const userId = jwt_decode(req.query.userToken)._id;
+    const user = await User.findOne({ _id: ObjectId(userId) }).select(
+      "-password"
+    );
+    if (!user) {
+      return res.status(400).json({ message: "No user found" });
+    }
+    return res.json(user);
   }
-  res.json(user);
+  return null;
 });
 
 // @desc Create User
