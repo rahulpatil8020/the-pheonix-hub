@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Navbar = (props) => {
+  const [activeNav, setActiveNav] = useState("home");
   const [user, setUser] = useContext(UserContext);
   const [nav, setNav] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
@@ -26,7 +27,6 @@ const Navbar = (props) => {
         })
         .then((res) => {
           if (res) setUser(res.data);
-          console.log(user, "...");
         });
     } catch (error) {
       console.log(error);
@@ -47,11 +47,25 @@ const Navbar = (props) => {
         <div className="flex items-center">
           <h1 className="text-3xl font-bold mr-4 sm:text-4xl">Pheonix</h1>
           <ul className="hidden md:flex items-center">
-            <Link to="/home">
-              <li>Home</li>
+            <Link
+              onClick={(e) => {
+                setActiveNav("home");
+              }}
+              to="/home"
+            >
+              <li className={activeNav === "home" && `text-indigo-600`}>
+                Home
+              </li>
             </Link>
-            <Link to="/about">
-              <li>About</li>
+            <Link
+              onClick={(e) => {
+                setActiveNav("about");
+              }}
+              to="/about"
+            >
+              <li className={activeNav === "about" && `text-indigo-600`}>
+                About
+              </li>
             </Link>
             <Link>
               <li>Support</li>
