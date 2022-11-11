@@ -1,29 +1,29 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
+import { HiCode } from "react-icons/hi";
 import axios from "axios";
-import { UserContext } from "../models/user-context";
 const HomePage = () => {
-  const userToken = localStorage.getItem("token");
-  useEffect(() => {
-    getUser();
-  }, []);
-  const [user, setUser] = useContext(UserContext);
-  const getUser = async () => {
+  const [competitions, setCompetitions] = useState([]);
+  const getAllCompetitions = async () => {
     try {
-      const url = "http://localhost:8000/api/v1/users";
-      await axios
-        .get(url, {
-          params: {
-            userToken: userToken,
-          },
-        })
-        .then((res) => {
-          setUser(res.data);
-        });
+      const url = "http://localhost:8000/api/v1/competitions";
+      await axios.get(url, {}).then((res) => {
+        if (res) setCompetitions(res.data);
+      });
     } catch (error) {
       console.log(error);
     }
   };
-  return <div>HomePage</div>;
+  useEffect(() => {
+    getAllCompetitions();
+  }, []);
+  return (
+    <>
+      <div className="flex items-center justify-start mt-5 ml-5">
+        <HiCode className="mx-3 text-3xl text-indigo-600" />
+        <h1 className="text-3xl">{competitions[0]?.name}</h1>
+      </div>
+    </>
+  );
 };
 
 export default HomePage;
