@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { HiCode } from "react-icons/hi";
 import axios from "axios";
+import CompetitionCard from "../components/CompetitionCard";
 const HomePage = () => {
   const [competitions, setCompetitions] = useState([]);
   const getAllCompetitions = async () => {
@@ -20,8 +21,11 @@ const HomePage = () => {
     <>
       <div className="flex items-center justify-start mt-5 ml-5">
         <HiCode className="mx-3 text-3xl text-indigo-600" />
-        <h1 className="text-3xl">{competitions[0]?.name}</h1>
+        <h1 className="text-3xl">Competitions for you</h1>
       </div>
+      {competitions.map((competition) => (
+        <CompetitionCard competition={competition} />
+      ))}
     </>
   );
 };
