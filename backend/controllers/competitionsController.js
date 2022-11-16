@@ -10,7 +10,6 @@ const ObjectId = mongodb.ObjectId;
 const getAllCompetitions = async (req, res) => {
   try {
     const competitions = await Competition.find().lean();
-    console.log(competitions);
     if (!competitions) {
       return res.status(400).json({ message: "No Competitions found" });
     }
@@ -45,7 +44,7 @@ const getCompetition = async (req, res) => {
       if (!competition) {
         return res.status(400).json({ message: "Competition Not Found" });
       }
-      return res.json(competition);
+      sres.json(competition);
     }
     return null;
   } catch (error) {
