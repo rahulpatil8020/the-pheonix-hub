@@ -7,4 +7,6 @@ router
   .put(competitionsController.updateCompetition)
   .delete(competitionsController.deleteCompetition);
 
+router.route("/:id").get(competitionsController.getCompetition);
+
 module.exports = router;
