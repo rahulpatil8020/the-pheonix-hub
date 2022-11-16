@@ -15,7 +15,7 @@ function App() {
         <Router>
           <Routes>
             <Route element={<PrivateRoutes />}>
-              <Route index element={<HomePage />} path="/home" exact />
+              <Route index element={<HomePage />} path="/competitions" exact />
               <Route element={<AboutPage />} path="/about" />
             </Route>
             <Route element={<Hero />} path="/" />

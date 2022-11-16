@@ -28,7 +28,7 @@ const Hero = () => {
         <p className="md:text-2xl text-xl font-bold text-gray-500 py-2">
           writing the code the way you want
         </p>
-        <Link to="/home">
+        <Link to="/competitions">
           <button className="w-[200px] rounded-md font-medium my-6 mx-auto py-3">
             Get Started
           </button>

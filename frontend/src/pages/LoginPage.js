@@ -23,7 +23,7 @@ const LoginPage = () => {
       const { data: res } = await axios.post(url, data);
       setUser(data);
       localStorage.setItem("token", res.data);
-      navigate("/home");
+      navigate("/competitions");
       console.log(res.message);
     } catch (error) {
       if (

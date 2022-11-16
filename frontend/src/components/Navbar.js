@@ -51,7 +51,7 @@ const Navbar = (props) => {
               onClick={(e) => {
                 setActiveNav("home");
               }}
-              to="/home"
+              to="/competitions"
             >
               <li className={activeNav === "home" && `text-indigo-600`}>
                 Home
@@ -92,7 +92,7 @@ const Navbar = (props) => {
               onClick={(e) => {
                 e.preventDefault();
                 if (!userToken) navigate("/login");
-                else navigate("/home");
+                else navigate("/competitions");
               }}
               className="border-none bg-transparent text-black mr-4"
             >
@@ -103,7 +103,7 @@ const Navbar = (props) => {
               onClick={(e) => {
                 e.preventDefault();
                 if (!userToken) navigate("/signup");
-                else navigate("/home");
+                else navigate("/competitions");
               }}
               className="px-8 py-3"
             >
