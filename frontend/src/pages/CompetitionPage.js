@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
+
 const CompetitionPage = (props) => {
+  const location = useLocation();
+  const competitionData = location.state.competitionData;
   const [questions, setQuestions] = useState([]);
   const getAllQuestions = async () => {
     try {
@@ -12,7 +16,6 @@ const CompetitionPage = (props) => {
           },
         })
         .then((res) => {
-          console.log(res, "###");
           if (res) setQuestions(res.data);
         });
     } catch (error) {
@@ -22,7 +25,7 @@ const CompetitionPage = (props) => {
   useEffect(() => {
     getAllQuestions();
   }, []);
-  return <div>{questions[0]?.name}</div>;
+  return <div>{competitionData?.name}</div>;
 };
 
 export default CompetitionPage;
