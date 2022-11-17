@@ -16,7 +16,7 @@ app.use(cors());
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/competitions", competitionsRoutes);
-app.use("/api/v1/competitions/:id", questionsRoutes);
+app.use("/api/v1/competitions/:id/questions", questionsRoutes);
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => console.log(`Listening on port : ${port}...`));

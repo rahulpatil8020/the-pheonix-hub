@@ -3,6 +3,7 @@ const mongodb = require("mongodb");
 const ObjectId = mongodb.ObjectId;
 
 const getAllQuestions = async (req, res) => {
+  console.log("Hey");
   try {
     const questions = await Question.find().lean();
     console.log(questions);
