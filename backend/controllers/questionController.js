@@ -3,10 +3,13 @@ const mongodb = require("mongodb");
 const ObjectId = mongodb.ObjectId;
 
 const getAllQuestions = async (req, res) => {
-  console.log("Hey");
+  const competitionId = ObjectId(req.query.competitionId);
+  console.log(competitionId, ".........");
   try {
-    const questions = await Question.find().lean();
-    console.log(questions);
+    const questions = await Question.find({
+      competition: competitionId,
+    }).lean();
+    // console.log(questions);
     if (!questions) {
       return res.status(400).json({ message: "No questions were found" });
     }
