@@ -25,7 +25,18 @@ const CompetitionPage = (props) => {
   useEffect(() => {
     getAllQuestions();
   }, []);
-  return <div>{competitionData?.name}</div>;
+  return (
+    <div>
+      <div className="h-screen w-6/12 m-auto shadow-xl flex flex-col">
+        <h1 className="text-4xl px-5 py-4 text font-bold">
+          {competitionData?.name}
+        </h1>
+        <p className="text-lg px-5 text-justify">
+          {competitionData?.description}
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default CompetitionPage;
