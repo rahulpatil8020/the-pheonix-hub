@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Moment from "moment";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 const CompetitionPage = (props) => {
   const location = useLocation();
   const competitionData = location.state.competitionData;
@@ -50,14 +52,20 @@ const CompetitionPage = (props) => {
             </div>
           );
         })}
-        <button
-          className="mt-5 py-2 w-24 self-center"
-          onClick={(e) => {
-            e.preventDefault();
-          }}
+        <Popup
+          trigger={
+            <button className="mt-5 py-2 w-24 self-center">Compete</button>
+          }
+          position="right center"
         >
-          Compete
-        </button>
+          <div className="flex items-center flex-col justify-center">
+            <h1 className="text-xl">Are you serious?</h1>
+            <div className="flex items-center m-2 justify-evenly w-full">
+              <button className="px-3 py-1">Yep</button>
+              <button className="px-3 py-1">Nope</button>
+            </div>
+          </div>
+        </Popup>
       </div>
     </div>
   );
