@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CodeEditorWindow from "./CodeEditorWindow";
+import CodeEditorWindow from "../components/CodeEditorWindow";
 import axios from "axios";
 import { classnames } from "../utils/general";
 import { languageOptions } from "../constants/languageOptions";
@@ -9,11 +9,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { defineTheme } from "../lib/defineTheme";
 import useKeyPress from "../hooks/useKeyPress";
-import OutputWindow from "./OutputWindow";
-import CustomInput from "./CustomInput";
-import OutputDetails from "./OutputDetails";
-import ThemeDropdown from "./ThemeDropdown";
-import LanguagesDropdown from "./LanguagesDropdown";
+import OutputWindow from "../components/OutputWindow";
+import CustomInput from "../components/CustomInput";
+import OutputDetails from "../components/OutputDetails";
+import ThemeDropdown from "../components/ThemeDropdown";
+import LanguagesDropdown from "../components/LanguagesDropdown";
 
 const javascriptDefault = `/**
 * Problem: Binary Search: Search a sorted array for a target value.
@@ -42,7 +42,7 @@ const target = 5;
 console.log(binarySearch(arr, target));
 `;
 
-const CodeEditorLayout = () => {
+const CompetePage = () => {
   const [code, setCode] = useState(javascriptDefault);
   const [customInput, setCustomInput] = useState("");
   const [outputDetails, setOutputDetails] = useState(null);
@@ -252,4 +252,4 @@ const CodeEditorLayout = () => {
   );
 };
 
-export default CodeEditorLayout;
+export default CompetePage;

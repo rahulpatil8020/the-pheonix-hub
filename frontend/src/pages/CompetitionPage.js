@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import Moment from "moment";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+
 const CompetitionPage = (props) => {
+  const userToken = localStorage.getItem("token");
   const location = useLocation();
   const competitionData = location.state.competitionData;
   const [questions, setQuestions] = useState([]);
@@ -27,6 +29,11 @@ const CompetitionPage = (props) => {
   useEffect(() => {
     getAllQuestions();
   }, []);
+
+  const userCompete = () => {
+    console.log("User compete the competition");
+  };
+
   return (
     <div>
       <div className="px-5 py-4 h-screen w-6/12 m-auto shadow-xl flex flex-col">
@@ -56,15 +63,33 @@ const CompetitionPage = (props) => {
           trigger={
             <button className="mt-5 py-2 w-24 self-center">Compete</button>
           }
-          position="right center"
+          modal
         >
-          <div className="flex items-center flex-col justify-center">
-            <h1 className="text-xl">Are you serious?</h1>
-            <div className="flex items-center m-2 justify-evenly w-full">
-              <button className="px-3 py-1">Yep</button>
-              <button className="px-3 py-1">Nope</button>
+          {(close) => (
+            <div className="rounded-md flex flex-col items-center justify-evenly">
+              <div className="text-xl my-2">Are You Serious ??</div>
+
+              <div className="flex items-center justify-evenly my-1 w-full">
+                <Link
+                  to={`/competition/${competitionData._id}/${userToken}`}
+                  target="_blank"
+                >
+                  <button className="px-3 py-1" onClick={userCompete}>
+                    Yep
+                  </button>
+                </Link>
+                <button
+                  className="px-3 py-1"
+                  onClick={() => {
+                    console.log("modal closed ");
+                    close();
+                  }}
+                >
+                  Nope
+                </button>
+              </div>
             </div>
-          </div>
+          )}
         </Popup>
       </div>
     </div>

@@ -8,6 +8,7 @@ import PrivateRoutes from "./utils/PrivateRoutes";
 import AboutPage from "./pages/AboutPage";
 import { UserProvider } from "./models/user-context";
 import CompetitionPage from "./pages/CompetitionPage";
+import CompetePage from "./pages/CompetePage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route index element={<HomePage />} path="/competitions" exact />
               <Route element={<AboutPage />} path="/about" />
               <Route element={<CompetitionPage />} path="/competitions/:id" />
+              <Route element={<CompetePage />} path="/competition/:id/:id" />
             </Route>
             <Route element={<Hero />} path="/" />
             <Route element={<LoginPage />} path="/login" />
