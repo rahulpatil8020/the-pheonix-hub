@@ -9,6 +9,7 @@ import AboutPage from "./pages/AboutPage";
 import { UserProvider } from "./models/user-context";
 import CompetitionPage from "./pages/CompetitionPage";
 import CompetePage from "./pages/CompetePage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <Route element={<AboutPage />} path="/about" />
               <Route element={<CompetitionPage />} path="/competitions/:id" />
               <Route element={<CompetePage />} path="/competition/:id/:id" />
+              <Route element={<ProfilePage />} path="/user/:id" />
             </Route>
             <Route element={<Hero />} path="/" />
             <Route element={<LoginPage />} path="/login" />

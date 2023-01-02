@@ -70,7 +70,11 @@ const Navbar = (props) => {
             <Link>
               <li>Support</li>
             </Link>
-            {user && <li>Hey {user?.firstName}</li>}
+            {user && (
+              <Link to={`/user/${user._id}`}>
+                <li>Hey {user?.firstName}</li>
+              </Link>
+            )}
           </ul>
         </div>
         {userToken ? (

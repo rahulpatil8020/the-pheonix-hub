@@ -72,7 +72,7 @@ const CompetitionPage = (props) => {
               <div className="flex items-center justify-evenly my-1 w-full">
                 <Link
                   to={`/competition/${competitionData._id}/${userToken}`}
-                  target="_blank"
+                  // target="_blank"
                 >
                   <button className="px-3 py-1" onClick={userCompete}>
                     Yep

@@ -10,7 +10,7 @@ const CodeEditorWindow = ({ onChange, language, code, theme }) => {
   return (
     <div className="overlay rounded-md overflow-hidden w-full h-full shadow-4xl">
       <Editor
-        height="85vh"
+        height="60vh"
         width={`70%`}
         language={language || "javascript"}
         value={value}

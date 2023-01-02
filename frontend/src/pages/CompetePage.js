@@ -15,32 +15,7 @@ import OutputDetails from "../components/OutputDetails";
 import ThemeDropdown from "../components/ThemeDropdown";
 import LanguagesDropdown from "../components/LanguagesDropdown";
 
-const javascriptDefault = `/**
-* Problem: Binary Search: Search a sorted array for a target value.
-*/
-// Time: O(log n)
-const binarySearch = (arr, target) => {
- return binarySearchHelper(arr, target, 0, arr.length - 1);
-};
-const binarySearchHelper = (arr, target, start, end) => {
- if (start > end) {
-   return false;
- }
- let mid = Math.floor((start + end) / 2);
- if (arr[mid] === target) {
-   return mid;
- }
- if (arr[mid] < target) {
-   return binarySearchHelper(arr, target, mid + 1, end);
- }
- if (arr[mid] > target) {
-   return binarySearchHelper(arr, target, start, mid - 1);
- }
-};
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const target = 5;
-console.log(binarySearch(arr, target));
-`;
+const javascriptDefault = `//Please write your code here`;
 
 const CompetePage = () => {
   const [code, setCode] = useState(javascriptDefault);
@@ -86,13 +61,13 @@ const CompetePage = () => {
     };
     const options = {
       method: "GET",
-      url: "https://judge0-ce.p.rapidapi.com/about",
+      url: "https://judge0-ce.p.rapidapi.com",
       params: { base64_encoded: "true", fields: "*" },
       headers: {
         "content-type": "application/json",
         "Content-Type": "application/json",
-        "X-RapidAPI-Key": "058fac861bmsh48b9b384696d865p1219fejsn2d93834521a8",
-        "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
+        "X-RapidAPI-Host": process.env.REACT_APP_RAPID_API_HOST,
+        "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
       },
       data: formData,
     };
@@ -125,7 +100,7 @@ const CompetePage = () => {
   const checkStatus = async (token) => {
     const options = {
       method: "GET",
-      url: process.env.REACT_APP_RAPID_API_URL + "/" + token,
+      url: "https://judge0-ce.p.rapidapi.com/about" + "/" + token,
       params: { base64_encoded: "true", fields: "*" },
       headers: {
         "X-RapidAPI-Host": process.env.REACT_APP_RAPID_API_HOST,
@@ -197,58 +172,63 @@ const CompetePage = () => {
   };
 
   return (
-    <>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      <div className="flex flex-row">
-        <div className="px-4 py-2">
-          <LanguagesDropdown onSelectChange={onSelectChange} />
-        </div>
-        <div className="px-4 py-2">
-          <ThemeDropdown handleThemeChange={handleThemeChange} theme={theme} />
-        </div>
-      </div>
-      <div className="flex flex-col space-x-4 items-start px-4 py-4">
-        <div className="flex flex-col w-full h-full justify-start items-end">
-          <CodeEditorWindow
-            code={code}
-            onChange={onChange}
-            language={language?.value}
-            theme={theme.value}
-          />
-        </div>
-
-        <div className="right-container flex flex-shrink-0 w-[30%] flex-col">
-          <OutputWindow outputDetails={outputDetails} />
-          <div className="flex flex-col items-end">
-            <CustomInput
-              customInput={customInput}
-              setCustomInput={setCustomInput}
-            />
-            <button
-              onClick={handleCompile}
-              disabled={!code}
-              className={classnames(
-                "mt-4 border-2 text-black border-black z-10 rounded-md shadow-[2px_2px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0",
-                !code ? "opacity-50" : ""
-              )}
-            >
-              {processing ? "Processing..." : "Compile and Execute"}
-            </button>
+    <div className="flex">
+      <div className="flex flex-col w-10/12">
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <div className="flex flex-row">
+          <div className="px-4 py-2">
+            <LanguagesDropdown onSelectChange={onSelectChange} />
           </div>
-          {outputDetails && <OutputDetails outputDetails={outputDetails} />}
+          <div className="px-4 py-2">
+            <ThemeDropdown
+              handleThemeChange={handleThemeChange}
+              theme={theme}
+            />
+          </div>
+        </div>
+        <div className="flex flex-col space-x-4 items-start px-4 py-4">
+          <div className="flex flex-col w-full h-full justify-start items-end">
+            <CodeEditorWindow
+              code={code}
+              onChange={onChange}
+              language={language?.value}
+              theme={theme.value}
+            />
+          </div>
+
+          <div className="right-container flex flex-shrink-0 w-[30%] flex-col">
+            <OutputWindow outputDetails={outputDetails} />
+            <div className="flex flex-col items-end">
+              <CustomInput
+                customInput={customInput}
+                setCustomInput={setCustomInput}
+              />
+              <button
+                onClick={handleCompile}
+                disabled={!code}
+                className={classnames(
+                  "mt-4 border-2 text-black border-black z-10 rounded-md shadow-[2px_2px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0",
+                  !code ? "opacity-50" : ""
+                )}
+              >
+                {processing ? "Processing..." : "Compile and Execute"}
+              </button>
+            </div>
+            {outputDetails && <OutputDetails outputDetails={outputDetails} />}
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
