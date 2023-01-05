@@ -72,7 +72,9 @@ const Navbar = (props) => {
             </Link>
             {user && (
               <Link to={`/user/${user._id}`}>
-                <li>Hey {user?.firstName}</li>
+                <li className={activeNav === "profile" && "text-indigo-600"}>
+                  Hey {user?.firstName}
+                </li>
               </Link>
             )}
           </ul>

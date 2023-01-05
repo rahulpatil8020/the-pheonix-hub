@@ -23,9 +23,11 @@ const HomePage = () => {
         <HiCode className="mx-3 text-3xl text-indigo-600" />
         <h1 className="text-3xl">Competitions for you</h1>
       </div>
-      {competitions.map((competition) => (
-        <CompetitionCard competition={competition} />
-      ))}
+      <div className="grid grid-cols-3 gap-6 px-3 py-3">
+        {competitions.map((competition) => (
+          <CompetitionCard competition={competition} />
+        ))}
+      </div>
     </>
   );
 };
